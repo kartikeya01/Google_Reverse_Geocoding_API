@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <title>API Testing...</title>
+
+        <style>
+
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            #map {
+                height: 400px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+                margin-top: 220px;
+                border-radius: 20px;
+            }
+
+            #floating-panel {
+                position: absolute;
+                top: 10px;
+                left: 25%;
+                z-index: 5;
+                margin-top: 35px;
+                background-color: rgb(141, 20, 20);
+                padding: 5px;
+                border: 1px solid #999;
+                text-align: center;
+                line-height: 30px;
+                padding-left: 10px;
+                border-radius: 5px;
+            }
+            #floating-panel {
+                position: absolute;
+                top: 5px;
+                left: 50%;
+                margin-left: -180px;
+                width: 350px;
+                z-index: 5;
+                background-color: rgb(233, 152, 152);
+                padding: 5px;
+                border: 1px solid #999;
+            }
+
+            @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
+            @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+            #latlng {
+                width: 200px;
+                border-radius: 2px;
+                outline: none;
+                font-family: 'Lato', sans-serif;
+            }
+
+            .jumbotron h1 {
+                color: #353535;
+            }
+            footer {
+                margin-bottom: 0 !important;
+                margin-top: 80px;
+            }
+            footer p {
+                margin: 0;
+                padding: 0;
+            }
+            span.icon {
+                margin: 0 5px;
+                color: #D64541;
+            }
+            h2 {
+                color: #BDC3C7;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            .mrng-60-top {
+                margin-top: 60px;
+            }
+
+            /* Global Button Styles */
+            a.animated-button:link, a.animated-button:visited {
+                position: relative;
+                display: block;
+                margin: 30px auto 0;
+                padding: 14px 15px;
+                color: #fff;
+                font-size:14px;
+                font-weight: bold;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                overflow: hidden;
+                letter-spacing: .08em;
+                border-radius: 0;
+                text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -o-transition: all 1s ease;
+                transition: all 1s ease;
+            }
+            a.animated-button:link:after, a.animated-button:visited:after {
+                content: "";
+                position: absolute;
+                height: 0%;
+                left: 50%;
+                top: 50%;
+                width: 150%;
+                z-index: -1;
+                -webkit-transition: all 0.75s ease 0s;
+                -moz-transition: all 0.75s ease 0s;
+                -o-transition: all 0.75s ease 0s;
+                transition: all 0.75s ease 0s;
+            }
+            a.animated-button:link:hover, a.animated-button:visited:hover {
+                color: #FFF;
+                text-shadow: none;
+            }
+            a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
+                height: 450%;
+            }
+            a.animated-button:link, a.animated-button:visited {
+                position: relative;
+                display: block;
+                margin: 30px auto 0;
+                padding: 14px 15px;
+                color: #fff;
+                font-size:14px;
+                border-radius: 0;
+                font-weight: bold;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                overflow: hidden;
+                letter-spacing: .08em;
+                text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -o-transition: all 1s ease;
+                transition: all 1s ease;
+            }
+
+            /* Victoria Buttons */
+
+            a.animated-button.victoria-one {
+                border: 2px solid #D24D57;
+            }
+            a.animated-button.victoria-one:after {
+                background: #D24D57;
+                -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+                -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+                -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+                transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+            }
+            a.animated-button.victoria-two {
+                border: 2px solid #D24D57;
+            }
+            a.animated-button.victoria-two:after {
+                background: #D24D57;
+                -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+                -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+                -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+                transform: translateX(-50%) translateY(-50%) rotate(25deg);
+            }
+            a.animated-button.victoria-three {
+                border: 2px solid #D24D57;
+            }
+            a.animated-button.victoria-three:after {
+                background: #D24D57;
+                opacity: .5;
+                -moz-transform: translateX(-50%) translateY(-50%);
+                -ms-transform: translateX(-50%) translateY(-50%);
+                -webkit-transform: translateX(-50%) translateY(-50%);
+                transform: translateX(-50%) translateY(-50%);
+            }
+            a.animated-button.victoria-three:hover:after {
+                height: 140%;
+                opacity: 1;
+            }
+            a.animated-button.victoria-four {
+                border: 2px solid #D24D57;
+            }
+            a.animated-button.victoria-four:after {
+                background: #D24D57;
+                opacity: .5;
+                -moz-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+                -ms-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+                -webkit-transform: translateY(-50%) translateX(-50%) rotate(90deg);
+                transform: translateY(-50%) translateX(-50%) rotate(90deg);
+            }
+            a.animated-button.victoria-four:hover:after {
+                opacity: 1;
+                height: 600% !important;
+            }
+            
+
+
+        </style>
+    </head>
+
+    <body bgcolor= "#353535">
+
+        <div id="floating-panel">
+            <p style="float: left">Current Geoloction:</p>
+            <input id="latlng" type="text" value="40.743018,-73.950751">
+            <div onclick="geocodeLatLng()" id="submit" class="col-md-3 col-sm-3 col-xs-6"> <a href="#" class="btn btn-sm animated-button victoria-two">Reverse to Address</a></div>
+        </div>
+
+        <center><div id="map"></div></center>
+
+        <script>
+            // function initMap() {
+            //     var location = {lat: 40.743018, lng: -73.950751};
+            //     var map = new google.maps.Map(document.getElementById("map"), {
+            //         zoom: 14,
+            //         center: location
+            //     });
+            //     var marker = new google.maps.Marker({
+            //         position: location,
+            //         map: map
+            //     });
+            // }
+            function initMap() {
+                var location = {lat: 40.743018, lng: -73.950751};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: location
+                });
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                var geocoder = new google.maps.Geocoder;
+                var infowindow = new google.maps.InfoWindow;
+
+                document.getElementById('submit').addEventListener('click', function() {
+                geocodeLatLng(geocoder, map, infowindow);
+                });
+            }
+
+            function geocodeLatLng(geocoder, map, infowindow) {
+                var input = document.getElementById('latlng').value;
+                var latlngStr = input.split(',', 2);
+                var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+                geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                    map.setZoom(11);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map
+                    });
+                    infowindow.setContent(results[0].formatted_address);
+                    infowindow.open(map, marker);
+                    } else {
+                    window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+                });
+            }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_K3qUANLy09_QuQaI4Abj2-v9K3rrZK8&callback=initMap"></script>
+
+    </body>
+</html>
